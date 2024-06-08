@@ -1,16 +1,14 @@
-import * as cdk from 'aws-cdk-lib';
+import { Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
+import { Dynamodb } from './constructs/Dynamodb';
 
-export class InfrastructureStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+export class InfrastructureStack extends Stack {
+  public readonly dynamodb: Dynamodb
+
+  constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
+    this.dynamodb = new Dynamodb(this, 'Dynamodb')
 
-    // example resource
-    // const queue = new sqs.Queue(this, 'InfrastructureQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
   }
 }
