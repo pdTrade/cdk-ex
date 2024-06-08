@@ -1,16 +1,17 @@
-import * as cdk from 'aws-cdk-lib';
+import { Stack, StackProps } from 'aws-cdk-lib';
+import { ContainerImage } from 'aws-cdk-lib/aws-ecs';
+import { ApplicationLoadBalancedFargateService } from 'aws-cdk-lib/aws-ecs-patterns';
 import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
 
-export class Ex1Stack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+export class Ex1Stack extends Stack {
+  constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
-
-    // example resource
-    // const queue = new sqs.Queue(this, 'Ex1Queue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
+    new ApplicationLoadBalancedFargateService(this, 'TestWebServer', {
+      taskImageOptions: {
+        image: ContainerImage.fromRegistry('amazon/amazon-ecs-sample'),
+      },
+      publicLoadBalancer: true
+    });
   }
 }
