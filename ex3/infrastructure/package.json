@@ -1,8 +1,8 @@
 {
-  "name": "ex3",
+  "name": "infrastructure",
   "version": "0.1.0",
   "bin": {
-    "ex3": "bin/ex3.js"
+    "infrastructure": "bin/infrastructure.js"
   },
   "scripts": {
     "build": "tsc",
