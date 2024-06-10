@@ -1,4 +1,9 @@
+import { domain_name, frontend_subdomain } from '../../../../config.json';
+
+
 import { CfnOutput, RemovalPolicy } from "aws-cdk-lib";
+import { Distribution, ViewerProtocolPolicy } from "aws-cdk-lib/aws-cloudfront";
+import { S3Origin } from "aws-cdk-lib/aws-cloudfront-origins";
 import {
   BlockPublicAccess,
   Bucket,
@@ -11,6 +16,9 @@ export class S3 extends Construct {
   public readonly web_bucket: Bucket;
 
   public readonly web_bucket_deployment;
+
+  public readonly distribution: Distribution;
+
 
   constructor(scope: Construct, id: string) {
     super(scope, id);
@@ -32,6 +40,13 @@ export class S3 extends Construct {
         destinationBucket: this.web_bucket,
       }
     );
+
+    this.distribution = new Distribution(scope, 'FE-Distribution', {
+      defaultBehavior: {
+        origin: new S3Origin(this.web_bucket),
+        viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+      }
+    })
 
     new CfnOutput(scope, "WebURL", { value: this.web_bucket.bucketWebsiteUrl });
   }
