@@ -21,6 +21,7 @@ export class ACM extends Construct {
     this.certificate = new Certificate(scope, "Certificate", {
       domainName: domain_name,
       validation: CertificateValidation.fromDns(props.hosted_zone),
+      subjectAlternativeNames: [`*.${domain_name}`],
     });
   }
 }
