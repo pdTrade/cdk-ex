@@ -22,7 +22,6 @@ const docClient = DynamoDBDocumentClient.from(ddbClient);
 app.get("/healthcheck", (_, res) => res.status(200).send(JSON.stringify("OK")));
 
 app.get("/", async (_, res) => {
-  console.log("get");
   const params: QueryCommandInput = {
     TableName: "main_table",
     ExpressionAttributeNames: {
