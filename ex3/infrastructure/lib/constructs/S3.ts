@@ -2,7 +2,6 @@ import { CfnOutput, RemovalPolicy } from "aws-cdk-lib";
 import {
   BlockPublicAccess,
   Bucket,
-  BucketAccessControl,
 } from "aws-cdk-lib/aws-s3";
 import { BucketDeployment, Source } from "aws-cdk-lib/aws-s3-deployment";
 import { Construct } from "constructs";
