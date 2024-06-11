@@ -18,8 +18,8 @@ export class RDS extends Construct {
         version: rds.MysqlEngineVersion.VER_8_0_36
       }),
       instanceType: ec2.InstanceType.of(
-        ec2.InstanceClass.T2,
-        ec2.InstanceSize.SMALL,
+        ec2.InstanceClass.T3,
+        ec2.InstanceSize.MICRO,
       ),
       port: 3306,
       vpc: props.vpc
